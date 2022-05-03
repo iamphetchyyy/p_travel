@@ -1,0 +1,439 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- inline css -->
+  <!-- body style="background-color: #C4DDFF;"-->
+
+  <!-- internal css -->
+  <!-- <style >
+    body {background-color:
+  #C4DDFF;}
+  h1{color: #001D6E; }
+  </style> -->
+
+  <!-- external css -->
+  <link rel="stylesheet" href="css\style.css">
+
+<!--Link library leaflet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+
+     <!-- W3 CSS template -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin="">
+    </script>
+
+<style>
+  #mapid{
+      height: 500px;
+  }
+</style>
+
+  <title>tourist map</title>
+
+  <strong><font color="#001D6E" size= "5"><center><h1><em>สถานที่ท่องเที่ยว</em></h1></center></font></strong>
+  <center><p><font color="#006E7F" size= "2">อำเภอปากช่อง - จังหวัดนครราชสีมา</font></p></center>
+  <center><p><font color="#006E7F" size= "2">by Dutphet K.</font></p></center>
+
+</head>
+<body>
+
+<!-- แบ่งหน้าจอ -->
+<div class="w3-row">
+    <div id="mapid" class="w3-half"></div>
+    <div id="content" class="w3-half">
+        <table class="w3-table w3-striped">
+            <tr>
+                <th>ชื่อแหล่งท่องเที่ยว</th>
+                <th>ประเภท</th>
+                <th>ระดับ</th>
+            </tr>
+            <tr>
+                <td>น้ำตก A</td>
+                <td>ธรรมชาติ</td>
+                <td>B</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- เรียกแผนที่ขึ้นมาเเสดง -->
+<script>
+//based map1
+var map = L.map("mapid").setView([14.53773019382713,101.3781596123539],11);
+//based map2
+var osm = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png")
+.addTo(map);
+//based map2
+var gsat = L.tileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}")
+            .addTo(map);
+//group layer (1+2)
+var baseMaps ={
+    //=ชื่อชั้นข้อมูล:ตัวแปร
+    OSM:osm,
+    GoogleSat:gsat,
+};
+
+//add data
+var tourpoint = {
+    type: "FeatureCollection",
+    name: "tour_plk",
+    crs: {
+        type: "name",
+        properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" },
+    },
+    features: [
+      {
+          type: "Feature",
+          properties: {
+            Name: "น้ำพุธรรมชาติบ้านท่าช้าง",
+            Type: "ธรรมชาติ",
+            FID_1: 1358.0,
+            CHANGWAT: "นครราชสีมา",
+            PROVINCE_1: "nakhonratchasima",
+            REGION: "ภาคตะวันออกเฉียงเหนือ",
+            level: "4.1",
+         },
+         geometry: {
+             type: "MultiPoint",
+             coordinates: [[101.41995262584527,14.548189810847926]],
+         },
+
+      },
+      {
+          type: "Feature",
+          properties: {
+            Name: "หอดูสัตว์หนองผักชี",
+            Type: "ธรรมชาติ",
+            FID_1: 1359.0,
+            CHANGWAT: "นครราชสีมา",
+            PROVINCE_1: "nakhonratchasima",
+            REGION: "ภาคตะวันออกเฉียงเหนือ",
+            level: "4.5",
+         },
+         geometry: {
+             type: "MultiPoint",
+             coordinates: [[101.35969846817189,14.454258356526271]],
+         },
+
+      },
+      {
+          type: "Feature",
+          properties: {
+            Name: "น้ำตกเหวสุวัต",
+            Type: "ธรรมชาติ",
+            FID_1: 1360.0,
+            CHANGWAT: "นครราชสีมา",
+            PROVINCE_1: "nakhonratchasima",
+            REGION: "ภาคตะวันออกเฉียงเหนือ",
+            level: "4.5",
+         },
+         geometry: {
+             type: "MultiPoint",
+             coordinates: [[101.41253972773193,14.444490351653588]],
+         },
+
+      },
+      {
+          type: "Feature",
+          properties: {
+            Name: "ไร่มณีศร ทุ่งทานตะวัน เขาใหญ่",
+            Type: "ธรรมชาติ",
+            FID_1: 1361.0,
+            CHANGWAT: "นครราชสีมา",
+            PROVINCE_1: "nakhonratchasima",
+            REGION: "ภาคตะวันออกเฉียงเหนือ",
+            level: "4.1",
+         },
+         geometry: {
+             type: "MultiPoint",
+             coordinates: [[101.44231288613226,14.571907669551027]],
+         },
+
+      },
+      {
+          type: "Feature",
+          properties: {
+            Name: "Khao Yai Art Museum",
+            Type: "ธรรมชาติ",
+            FID_1: 1362.0,
+            CHANGWAT: "นครราชสีมา",
+            PROVINCE_1: "nakhonratchasima",
+            REGION: "ภาคตะวันออกเฉียงเหนือ",
+            level: "4.5",
+         },
+         geometry: {
+             type: "MultiPoint",
+             coordinates: [[101.43331662399173,14.553414104700297]],
+         },
+
+      },
+      {
+          type: "Feature",
+          properties: {
+            Name: "วัดศิมาลัยทรงธรรม",
+            Type: "วัฒนธรรม",
+            FID_1: 1363.0,
+            CHANGWAT: "นครราชสีมา",
+            PROVINCE_1: "nakhonratchasima",
+            REGION: "ภาคตะวันออกเฉียงเหนือ",
+            level: "4.4",
+         },
+         geometry: {
+             type: "MultiPoint",
+             coordinates: [[101.41172962399186,14.57392474781375]],
+         },
+
+      },
+      {
+          type: "Feature",
+          properties: {
+            Name: "วัดเทพพิทักษ์ปุณณาราม",
+            Type: "วัฒนธรรม",
+            FID_1: 1364.0,
+            CHANGWAT: "นครราชสีมา",
+            PROVINCE_1: "nakhonratchasima",
+            REGION: "ภาคตะวันออกเฉียงเหนือ",
+            level: "4.5",
+         },
+         geometry: {
+             type: "MultiPoint",
+             coordinates: [[101.26564502213867,14.617543892213169]],
+         },
+
+      },
+      {
+          type: "Feature",
+          properties: {
+            Name: "หลวงพ่อทวดเขาใหญ่ ",
+            Type: "กิจกรรมพิเศษ",
+            FID_1: 1365.0,
+            CHANGWAT: "นครราชสีมา",
+            PROVINCE_1: "nakhonratchasima",
+            REGION: "ภาคตะวันออกเฉียงเหนือ",
+            level: "4.5",
+         },
+         geometry: {
+             type: "MultiPoint",
+             coordinates: [[101.42916708166445,14.57863924181215]],
+         },
+
+      },
+      {
+          type: "Feature",
+          properties: {
+            Name: "Bonanza Exotic Park",
+            Type: "สวนสัตว์",
+            FID_1: 1366.0,
+            CHANGWAT: "นครราชสีมา",
+            PROVINCE_1: "nakhonratchasima",
+            REGION: "ภาคตะวันออกเฉียงเหนือ",
+            level: "4.0",
+         },
+         geometry: {
+             type: "MultiPoint",
+             coordinates: [[101.43981642467813,14.583374810456812]],
+         },
+
+      },
+      {
+          type: "Feature",
+          properties: {
+            Name: "Scenical World Khao Yai",
+            Type: "สวนสนุก",
+            FID_1: 1367.0,
+            CHANGWAT: "นครราชสีมา",
+            PROVINCE_1: "nakhonratchasima",
+            REGION: "ภาคตะวันออกเฉียงเหนือ",
+            level: "4.0",
+         },
+         geometry: {
+             type: "MultiPoint",
+             coordinates: [[101.3781596123539,14.53773019382713]],
+         },
+
+      },
+   ],
+};
+
+//add marker and popup
+         var tourLayer = L.geoJSON(tourpoint, {
+             pointToLayer: function (feature, latlng) {
+                  return L.marker(latlng).bindPopup(feature.properties.Name);
+         },
+         onEachFeature: function (feature, layer) {
+             layer.on("mouseover", function () {
+                 document
+                     .getElementById(feature.properties.FID_1)
+                     .classList.add("w3-red");
+             });
+
+             layer.on("mouseout", function () {
+                 document
+                     .getElementById(feature.properties.FID_1)
+                     .classList.remove("w3-red");
+             });
+         },
+     }).addTo(map);
+
+//link table with popup and marker
+     var cont = "";
+     cont += "<table class='w3-table w3-striped'>";
+     cont += "<tr>";
+     cont += "<th>ชื่อแหล่งท่องเที่ยว</th>";
+     cont += "<th>ประเภท</th>";
+     cont += "<th>ระดับ</th>";
+     cont += "</tr>";
+     for (let i in tourpoint.features) {
+         cont += "<tr id=" + tourpoint.features[i].properties.FID_1 + ">";
+         cont += "<td>" + tourpoint.features[i].properties.Name + "</td>";
+         cont += "<td>" + tourpoint.features[i].properties.Type + "</td>";
+         cont += "<td>" + tourpoint.features[i].properties.level + "</td>";
+         cont += "</tr>";
+     }
+     cont += "</table>";
+     console.log(cont);
+     document.getElementById("content").innerHTML = cont;
+
+//create polygon
+var polygonGeoJson = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.5521240234375,
+              14.865159786147519
+            ],
+            [
+              101.45736694335936,
+              14.874450896601473
+            ],
+            [
+              101.35986328125,
+              14.814715356963944
+            ],
+            [
+              101.29806518554688,
+              14.739026694833317
+            ],
+            [
+              101.24862670898438,
+              14.740354793222743
+            ],
+            [
+              101.21566772460936,
+              14.745667105779793
+            ],
+            [
+              101.19644165039062,
+              14.744339039791964
+            ],
+            [
+              101.18408203124999,
+              14.692538153744145
+            ],
+            [
+              101.20056152343749,
+              14.643382368653851
+            ],
+            [
+              101.21017456054688,
+              14.591557583390998
+            ],
+            [
+              101.24176025390625,
+              14.566305186929066
+            ],
+            [
+              101.37359619140625,
+              14.533073943499117
+            ],
+            [
+              101.51916503906249,
+              14.503826315249
+            ],
+            [
+              101.58370971679688,
+              14.493189855992824
+            ],
+            [
+              101.61529541015625,
+              14.531744589750675
+            ],
+            [
+              101.66885375976562,
+              14.60218930495232
+            ],
+            [
+              101.65374755859375,
+              14.750979288703963
+            ],
+            [
+              101.64276123046875,
+              14.81073240115442
+            ],
+            [
+              101.590576171875,
+              14.846576365691364
+            ],
+            [
+              101.5576171875,
+              14.865159786147519
+            ],
+            [
+              101.5521240234375,
+              14.865159786147519
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
+
+var polygonLayer = L.geoJSON(polygonGeoJson, {
+style: function (feature) {
+return {fillcolor:'pink',weight: 2,
+        opacity: 1,
+        color: 'red',  //Outline color
+        fillOpacity: 0.4 };
+},
+onEachFeature: function (feature, layer) {
+layer.bindPopup(feature.properties.name);
+layer.on("mouseover", function () {
+layer.openPopup();
+});
+layer.on("mouseout", function () {
+layer.closePopup();
+});
+},
+});
+
+//group point+polygon layer
+var overlay = {
+    สถานที่ท่องเที่ยว_อำเภอปากช่อง:tourLayer,
+    แผนที่อำเภอปากช่อง:polygonLayer
+};
+
+//Create layer control
+L.control.layers(baseMaps,overlay).addTo(map);
+
+</script>
+
+<br><br><center><p><font color="#006E7F" size= "2">💖 THANK YOU 🙏</font></p></center><br>
+
+</body>
+</html>
